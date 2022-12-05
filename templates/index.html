@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Stundent</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body class="body">
+
+    <div class="form-container">
+
+        <h1>Add a student!</h1>
+
+        <form method='POST'>
+            <p>Firstname:</p>
+            <input type='text' name="form_FirstName" placeholder="Firstname" id="form_ID_Firstname">
+            <p>Surname:</p>
+            <input type='text' name="form_Surname" placeholder="Surname" id="form_ID_Surname">
+            <p>Present:</p>
+            <input type="checkbox" name="form_Present" id="form_ID_SubmitBtn"> </br> </br>
+
+            <input type="Submit" name="Submit" value="Verzend"> </br>
+        </form>
+
+    </div>
+
+    <div class='table-container'>
+        <table>
+            <thead>
+                <tr>
+                    <th>StudentID</th>
+                    <th>First Name</th>
+                    <th>Surname</th>
+                    <th>Present</th>
+                    <th>Delete</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in db_data %}
+                <tr>
+                    <td>{{student[0]}}</td>
+                    <td>{{student[1]}}</td>
+                    <td>{{student[2]}}</td>
+                    {% if student[3] == 1 %}
+                    <td>Present</td>
+                    {% else %}
+                    <td>Absent</td>
+                    {% endif %}
+                    <td class='record_delete'>
+                        <a href='/delete?deletenumber={{student[0]}}'>Delete</a>
+                    </td>
+                    <td class='record_update'>
+                        <a href='/update?updatenumber={{student[0]}}'>Update</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+</body>
+
+</html>
